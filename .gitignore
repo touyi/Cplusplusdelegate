@@ -1,0 +1,7 @@
+*.db
+*.csproj
+*.cd
+*.opendb
+/.vs/
+/CppDelegate/Debug/
+/Debug/
