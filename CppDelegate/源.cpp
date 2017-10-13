@@ -2,18 +2,18 @@
 #include"delegatefun.h"
 
 using namespace std;
-void fun()
+int fun(int *a)
 {
-	cout << "正常函数" << endl;
+	return 1;
 }
 class A
 {
 public:
 	A();
 	~A();
-	void fun()
+	int fun(int *a)
 	{
-		cout << "成员函数" << endl;
+		return 1;
 	}
 private:
 
@@ -28,12 +28,14 @@ A::~A()
 }
 int main()
 {
-	CDelegate e;
+	CDelegate<int,int*> e;
 	e += newDelegate(fun);
 	e += newDelegate(&A(), &A::fun);
-	e();
+	int * tt = new int();
+	auto temp = e(tt);
+	
 	e-= newDelegate(fun);
-	e();
+	//e(6);
 	system("pause");
 	return 0;
 }

@@ -3,13 +3,15 @@
 #include"NormalDelegate.h"
 #include"MemberDelegate.h"
 #include"Delegate.h"
-CMDelegate* newDelegate(void(*fun)())
+
+template<typename ReturnType,typename...param>
+CMDelegate<ReturnType,param...>* newDelegate(ReturnType(*fun)(param...))
 {
-	return new CNormalDelegate(fun);
+	return new CNormalDelegate<ReturnType,param...>(fun);
 }
 
-template<typename T>
-CMDelegate* newDelegate(T* object, void(T::*fun)())
+template<typename T, typename ReturnType, typename...param>
+CMDelegate<ReturnType, param...>* newDelegate(T* object, ReturnType(T::*fun)(param...))
 {
-return new CMemberDelegate<T>(object, fun);
+	return new CMemberDelegate<T, ReturnType, param...>(object, fun);
 }
