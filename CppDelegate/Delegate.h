@@ -170,8 +170,4 @@ void CDelegate<void, Param...>::operator()(Param...par)
 }
 
 
-/*
-* 特例模板 const 限定函数
-*/
-
 
