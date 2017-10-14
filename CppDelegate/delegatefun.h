@@ -15,3 +15,9 @@ CMDelegate<ReturnType, param...>* newDelegate(T* object, ReturnType(T::*fun)(par
 {
 	return new CMemberDelegate<T, ReturnType, param...>(object, fun);
 }
+
+template<typename T>
+CMemberDelegate<T,decltype(&T::operator())>* newDelegate(T& object)
+{
+	return new CMemberDelegate<T, decltype(&T::operator())>(&object, &T::operator());
+}

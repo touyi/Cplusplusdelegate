@@ -2,17 +2,19 @@
 #include"delegatefun.h"
 
 using namespace std;
-int fun(int *a)
+int fun(int a)
 {
-	return 1;
+	cout << 2 << endl;
+	return 2;
 }
 class A
 {
 public:
 	A();
 	~A();
-	int fun(int *a)
+	int fun(int a)
 	{
+		cout << 1 << endl;
 		return 1;
 	}
 private:
@@ -28,14 +30,12 @@ A::~A()
 }
 int main()
 {
-	CDelegate<int,int*> e;
+	CDelegate<int,int> e;
 	e += newDelegate(fun);
 	e += newDelegate(&A(), &A::fun);
-	int * tt = new int();
-	auto temp = e(tt);
-	
-	e-= newDelegate(fun);
-	//e(6);
+	auto p = [](int a) { cout << 3; return 3; };
+	e += newDelegate(p);
+	e(5);
 	system("pause");
 	return 0;
 }
